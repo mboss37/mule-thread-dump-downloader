@@ -1,0 +1,50 @@
+# Python-specific ignores
+__pycache__/
+*.pyc
+*.pyo
+
+# Environments
+/.venv
+/.env
+
+# Pipenv
+Pipfile.lock
+
+# Editor-specific ignores (add more if needed)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Compiled Python files
+*.pyc
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Distribution/build folders
+/dist/
+/build/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Output Folders inlcuding files
+thread_dumps/
+
+# Other files and directories to ignore (customize as needed)
+__pycache__
+*.egg-info/
+*.egg
+*.so
+*.out
+*.pid
+*.swp
+*.db
+*.db-journal
+*.sqlite
+*.coverage
+*.cache
+*.tox
+*.hypothesis
