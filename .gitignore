@@ -32,6 +32,7 @@ Pipfile.lock
 
 # Output Folders inlcuding files
 thread_dumps/
+log_files/
 
 # Other files and directories to ignore (customize as needed)
 __pycache__
