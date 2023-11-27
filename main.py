@@ -3,6 +3,7 @@ from helpers.get_environment_id import get_environment_id
 from helpers.get_instance_id import get_instance_id
 from helpers.get_thread_dump import get_thread_dump
 from helpers.get_log_file import get_log_file
+# from helpers.log_analysis import parse_log_file create_bar_chart
 from dotenv import load_dotenv
 import os
 from datetime import datetime
@@ -67,11 +68,14 @@ def download_log_file():
         # Write the log to the file
         with open(filename, 'w') as file:
             file.write(log_file)
-        print(f"Thread dump saved to {filename}")
+        print(f"Log file saved to {filename}")
+
+        # Analyze the log file and create the bar chart
+        # log_data = parse_log_file(filename)
+        # create_bar_chart(log_data)
 
     except Exception as e:
         print(f"An error occurred: {e}")
-
 
 def main():
     print("Select the feature you want to use:")
