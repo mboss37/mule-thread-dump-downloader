@@ -2,7 +2,6 @@ from helpers.get_bearer_token import retrieve_bearer_token
 from helpers.get_environment_id import get_environment_id
 from helpers.get_instance_id import get_instance_id
 from helpers.get_thread_dump import get_thread_dump
-import argparse
 from dotenv import load_dotenv
 import os
 from datetime import datetime
@@ -10,20 +9,10 @@ from datetime import datetime
 # Load variables from .env file
 load_dotenv()
 
-def setup_arg_parser():
-    parser = argparse.ArgumentParser(description="Request Thread Dump for Application")
-    parser.add_argument("--application_name", required=True, help="Name of the application")
-    parser.add_argument("--environment", required=True, help="Environment name")
-    return parser
-
-def main():
-    # Create the parser and parse arguments
-    parser = setup_arg_parser()
-    args = parser.parse_args()
-
-    # Access the arguments
-    application_name = args.application_name
-    environment = args.environment
+def download_thread_dump():
+    # Get the application name and environment from the user
+    application_name = input("Enter the application name: ")
+    environment = input("Enter the environment (DEV, INT, EDU or PROD): ")
 
     # Retrieve the bearer token
     bearer_token = retrieve_bearer_token()
@@ -31,6 +20,8 @@ def main():
     try:
         environment_id = get_environment_id(bearer_token, environment)
         instance_id = get_instance_id(bearer_token, environment_id, application_name)
+        
+        # Retrieve the thread dump
         thread_dump = get_thread_dump(application_name, environment_id, instance_id)
 
         # Define the directory to save the thread dump
@@ -48,6 +39,38 @@ def main():
 
     except Exception as e:
         print(f"An error occurred: {e}")
+
+def download_log_file():
+    # Get the application name and environment from the user
+    application_name = input("Enter the application name: ")
+    environment = input("Enter the environment (DEV, INT, EDU or PROD): ")
+
+    # Retrieve the bearer token
+    bearer_token = retrieve_bearer_token()
+
+    try:
+        environment_id = get_environment_id(bearer_token, environment)
+        instance_id = get_instance_id(bearer_token, environment_id, application_name)
+        
+        print("Script Work in Progress")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+def main():
+    print("Select the feature you want to use:")
+    print("1: Download Thread Dump")
+    print("2: Download Log File")
+
+    choice = input("Enter your choice (1 or 2): ")
+
+    if choice == '1':
+        download_thread_dump()
+    elif choice == '2':
+        download_log_file()
+    else:
+        print("Invalid choice. Please enter 1 or 2.")
 
 if __name__ == "__main__":
     main()
