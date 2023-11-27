@@ -6,12 +6,7 @@ from requests.auth import HTTPBasicAuth
 def get_thread_dump(application_name, environment_id, instance_id):
     """
     Retrieves the thread dump of a specified application instance.
-
-    Args:
-    application_name (str): The name of the application.
-    environment_id (str): The ID of the environment.
-    instance_id (str): The ID of the application instance.
-
+    
     Returns:
     str: The thread dump of the application instance.
 

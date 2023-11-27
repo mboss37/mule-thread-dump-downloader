@@ -2,6 +2,7 @@ from helpers.get_bearer_token import retrieve_bearer_token
 from helpers.get_environment_id import get_environment_id
 from helpers.get_instance_id import get_instance_id
 from helpers.get_thread_dump import get_thread_dump
+from helpers.get_log_file import get_log_file
 from dotenv import load_dotenv
 import os
 from datetime import datetime
@@ -52,7 +53,21 @@ def download_log_file():
         environment_id = get_environment_id(bearer_token, environment)
         instance_id = get_instance_id(bearer_token, environment_id, application_name)
         
-        print("Script Work in Progress")
+        # Retrieve the log file
+        log_file = get_log_file(application_name, environment_id, instance_id)
+
+        # Define the directory to save the log file
+        log_dir = f"log_files/{environment}"
+        os.makedirs(log_dir, exist_ok=True)
+
+        # Create a unique filename for the log file
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{log_dir}/{application_name}_{timestamp}.txt"
+
+        # Write the log to the file
+        with open(filename, 'w') as file:
+            file.write(log_file)
+        print(f"Thread dump saved to {filename}")
 
     except Exception as e:
         print(f"An error occurred: {e}")
